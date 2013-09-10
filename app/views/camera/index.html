@@ -1,0 +1,8 @@
+<div ng-controller="IndexCtrl" class="content-padded camera">
+  <div class="topcoat-button--cta full center" hm-tap="getPicture(cameraOptions.fromCamera)">Capture photo</div>
+  <br><br>
+  <div class="topcoat-button full center" hm-tap="getPicture(cameraOptions.fromPhotoLibrary)">Choose from Photo Library</div>
+  <br><br>
+  <img id="photo" ng-src="{{imageSrc}}" ng-hide="showSpinner">
+  <img class="spinner" src="/vendor/topcoat/img/spinner2x.png" ng-show="showSpinner">
+</div>

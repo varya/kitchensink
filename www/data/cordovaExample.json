@@ -1,0 +1,12 @@
+[
+  {
+    "cordovaExample_id": 1,
+    "name": "Camera Example",
+    "url": "/views/camera/index.html"
+  },
+  {
+    "cordovaExample_id": 2,
+    "name": "Camera Example",
+    "url": "/views/camera/index.html"
+  }
+]

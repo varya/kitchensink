@@ -1,4 +1,11 @@
-kitchensink2
-============
+AppGyver Steroids Kitchensink
+===========
 
-kitchensink2
+Run with
+
+    $ steroids connect
+
+in the project root.
+
+Note: this project requires [Steroids npm](http://guides.appgyver.com/steroids/guides/steroids_npm/installing/) to be installed.
+
