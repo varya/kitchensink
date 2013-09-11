@@ -6,7 +6,7 @@
   },
   {
     "cordovaExample_id": 2,
-    "name": "Camera Example",
-    "url": "/views/camera/index.html"
+    "name": "Facebook Login (via plugin, iOS only)",
+    "url": "/views/facebook/plugin.html"
   }
 ]

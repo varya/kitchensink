@@ -1,0 +1,39 @@
+<!-- EXPERIMENTAL, DOESN'T FUNCTION PROPERLY -->
+
+<div id="fb-root"></div>
+
+<script>
+window.fbAsyncInit = function() {
+  // init the FB JS SDK
+  FB.init({
+    appId      : '167554586768574',                    // App ID from the app dashboard
+    channelUrl : '',                                   // Channel file for x-domain comms
+    status     : true,                                 // Check Facebook Login status
+    xfbml      : true                                  // Look for social plugins on the page
+  });
+
+  // Additional initialization code such as adding Event Listeners goes here
+};
+
+// Load the SDK asynchronously
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "//connect.facebook.net/en_US/all.js";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div ng-controller="WebCtrl" class="content-padded">
+  <h1>Facebook Connect</h1>
+  <h2>Example with web SDK</h2>
+
+  <div class="topcoat-button--cta full center" hm-tap="login()">Login with Facebook</div>
+  <br><br>
+  <div class="topcoat-button full center" hm-tap="logout()">Logout with Facebook</div>
+  
+  <br><br><br><br>
+  
+  <div class="topcoat-button--cta full center" hm-tap="queryName()">Query Name</div>
+</div>
