@@ -8,5 +8,10 @@
     "cordovaExample_id": 2,
     "name": "Facebook Login (via plugin, iOS only)",
     "url": "/views/facebook/plugin.html"
+  },
+  {
+    "cordovaExample_id": 3,
+    "name": "Echo Plugin test",
+    "url": "/views/echoPlugin/index.html"
   }
 ]

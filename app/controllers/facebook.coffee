@@ -1,3 +1,6 @@
+# Information on using the integrated Facebook Connect plugin
+#   http://guides.appgyver.com/steroids/guides/phonegap_on_steroids/facebook-connect-plugin
+
 document.addEventListener "deviceready", ->
   angular.bootstrap document, ['facebookApp']
 
