@@ -8,16 +8,16 @@ if ( typeof angular == 'undefined' ) {
 };
 
 
-var module = angular.module('CordovaExampleModel', ['restangular']);
+var cordovaModule = angular.module('ExampleModel', ['restangular']);
 
-module.factory('CordovaExampleRestangular', function(Restangular) {
+cordovaModule.factory('ExampleRestangular', function(Restangular) {
 
   return Restangular.withConfig(function(RestangularConfigurer) {
 
     RestangularConfigurer.setBaseUrl('http://localhost/data');
     RestangularConfigurer.setRequestSuffix('.json');
     RestangularConfigurer.setRestangularFields({
-      id: "cordovaExample_id",
+      id: "example_id",
       name: "name",
       url: "url"
     });

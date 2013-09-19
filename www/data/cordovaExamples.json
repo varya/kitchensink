@@ -1,21 +1,21 @@
 [
   {
-    "cordovaExample_id": 1,
+    "example_id": 1,
     "name": "Camera",
     "url": "/views/camera/index.html"
   },
   {
-    "cordovaExample_id": 2,
+    "example_id": 2,
     "name": "Calendar Plugin",
     "url": "/views/calendar/index.html"
   },
   {
-    "cordovaExample_id": 3,
+    "example_id": 3,
     "name": "Facebook Login (via plugin, iOS only)",
     "url": "/views/facebook/plugin.html"
   },
   {
-    "cordovaExample_id": 4,
+    "example_id": 4,
     "name": "Echo Plugin test",
     "url": "/views/echoPlugin/index.html"
   }

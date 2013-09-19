@@ -18,7 +18,7 @@ steroids.config.name = "Steroids Kitchensink"
 #   - "http://localhost/index.html" - served from the device's web server.
 #   - "http://www.google.com - any external URL.
 
-steroids.config.location = "http://localhost/views/cordovaExample/index.html"
+# steroids.config.location = "http://localhost/views/index/index.html"
 
 # -- Remote hosts: steroids.config.hosts --
 # Defines the hostnames that the application will capture. Requests by the Steroids app to a captured hostname will be served from localhost. Using the example below, the file at www/index.html would be served equivalently from both http://localhost/index.html and http://mobileapp.example.com/index.html.
@@ -33,7 +33,7 @@ steroids.config.location = "http://localhost/views/cordovaExample/index.html"
 # Enabling tabs will override steroids.config.location (which is inteded for single WebView apps, i.e. PhoneGap's default behavior) and show the first tab of the tab array on startup.
 # Default: false
 #
-# steroids.config.tabBar.enabled = true
+steroids.config.tabBar.enabled = true
 
 # -- Defining tabs via the tab array --
 # An array of tab objects that specify which tabs are shown on app startup.
@@ -46,18 +46,18 @@ steroids.config.location = "http://localhost/views/cordovaExample/index.html"
 #   - "http://localhost/index.html" - served from the device's web server.
 #   - "http://www.google.com - any external URL.
 #
-# steroids.config.tabBar.tabs = [
-#   {
-#     title: "Index"
-#     icon: "icons/pill@2x.png"
-#     location: "http://localhost/index.html"
-#   },
-#   {
-#     title: "Internet"
-#     icon: "icons/telescope@2x.png"
-#     location: "http://www.google.com"
-#   }
-# ]
+steroids.config.tabBar.tabs = [
+  {
+    title: "Cordova"
+    icon: "icons/telescope@2x.png"
+    location: "http://localhost/views/example/cordovaIndex.html"
+  },
+  {
+    title: "Steroids"
+    icon: "icons/pill@2x.png"
+    location: "http://localhost/views/example/steroidsIndex.html"
+  }
+]
 
 # -- Selected tab background image --
 # Used to set an indicator image for the selected tab on iOS (can be bigger than the tab area).

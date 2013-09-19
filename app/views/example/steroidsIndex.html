@@ -1,0 +1,16 @@
+<div ng-app="exampleApp">
+
+  <div ng-controller="SteroidsIndexCtrl">
+    <div class="topcoat-list__container">
+
+      <ul class="topcoat-list">
+        <li class="topcoat-list__item" hm-tap="open(steroidsExample.url)" ng-repeat="steroidsExample in steroidsExamples">
+          {{ steroidsExample.name }}
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
