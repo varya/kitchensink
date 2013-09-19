@@ -21,10 +21,9 @@ exampleApp.controller 'CordovaIndexCtrl', ($scope, ExampleRestangular)->
 exampleApp.controller 'SteroidsIndexCtrl', ($scope, ExampleRestangular)->
 
   # Helper function for opening new webviews
-  $scope.open = ($event)->
-    alert($event)
-    # webView = new steroids.views.WebView url
-    # steroids.layers.push webView
+  $scope.open = (url)->
+    webView = new steroids.views.WebView url
+    steroids.layers.push webView
 
   # Fetch all objects from the local JSON (see app/models/steroidsExample.js)
   $scope.steroidsExamples = ExampleRestangular.all('steroidsExamples').getList()
