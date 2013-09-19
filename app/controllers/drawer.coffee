@@ -31,14 +31,26 @@ drawerApp.controller 'IndexCtrl', ($scope)->
       console.log "Preloaded drawer with id: drawerExample"
   )
 
+  $scope.gestureEnabled = false
+
   $scope.openDrawer = ()->
     steroids.drawers.show(leftDrawer)
 
   $scope.enableGesture = ()->
     steroids.drawers.enableGesture(leftDrawer)
+    $scope.gestureEnabled = true
 
   $scope.disableGesture = ()->
     steroids.drawers.disableGesture()
+    $scope.gestureEnabled = false
+
+  $scope.openLayer = ()->
+    disabledView = new steroids.views.WebView("/views/drawer/disabled.html")
+    steroids.layers.push(disabledView)
+
+  document.addEventListener "visibilitychange", ->
+    if !document.hidden and $scope.gestureEnabled
+      steroids.drawers.enableGesture(leftDrawer)
 
 drawerApp.controller 'DrawerCtrl', ($scope)->
 
@@ -53,3 +65,8 @@ drawerApp.controller 'DrawerCtrl', ($scope)->
   $scope.openGoogle = ()->
     steroids.openURL("http://www.google.com")
 
+drawerApp.controller 'DisabledCtrl', ($scope)->
+
+  document.addEventListener "visibilitychange", ->
+    if !document.hidden
+      steroids.drawers.disableGesture()
