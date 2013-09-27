@@ -37,3 +37,12 @@ input {
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
 }
+
+/* Block buttons */
+
+.topcoat-button.block, .topcoat-button--cta.block {
+  margin-bottom:15px;
+}
+.block {
+  display:block;
+}

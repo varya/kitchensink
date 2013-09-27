@@ -3,5 +3,10 @@
     "example_id": 1,
     "name": "Drawer",
     "url": "/views/drawer/index.html"
-  } 
+  },
+  {
+    "example_id": 2,
+    "name": "Camera and userFilesPath",
+    "url": "/views/camera/index.html"
+  }
 ]

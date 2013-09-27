@@ -48,14 +48,14 @@ steroids.config.tabBar.enabled = true
 #
 steroids.config.tabBar.tabs = [
   {
-    title: "Cordova"
-    icon: "icons/telescope@2x.png"
-    location: "http://localhost/views/example/cordovaIndex.html"
-  },
-  {
     title: "Steroids"
     icon: "icons/pill@2x.png"
     location: "http://localhost/views/example/steroidsIndex.html"
+  },
+  {
+    title: "Cordova"
+    icon: "icons/telescope@2x.png"
+    location: "http://localhost/views/example/cordovaIndex.html"
   }
 ]
 
