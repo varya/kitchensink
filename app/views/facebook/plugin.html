@@ -1,19 +1,26 @@
-<script src="/javascripts/plugins/FacebookConnect.js"></script>
+<script src="/javascripts/plugins/cdv-plugin-fb-connect.js"></script>
+<script src="/javascripts/plugins/facebook-js-sdk.js"></script>
 
 <div ng-controller="PluginCtrl" class="content-padded">
-  <h1>Facebook Connect</h1>
-  <h2>Example with plugin</h2>
-  
-  <p>This plugin requires you to build a custom Scanner with the correct Facebook App ID defined. See</p>
-  <small><pre>app/controllers/facebook.coffee</pre></small>
-  <p>for more information.</p>
+  <h2>Plugin Example</h2>
 
-  <div class="topcoat-button--cta full center" hm-tap="login()">Login to Facebook</div>
-  <br><br>
-  <div class="topcoat-button full center" hm-tap="requestWithGraphPath()">Request Friends from Graph</div>
-  
-  <br><br><br><br>
-  
-  <div class="topcoat-button full center" hm-tap="logout()">Logout from Facebook</div>
+  <p>This plugin requires you to build a custom Scanner with the correct Facebook App ID defined. Otherwise, trying to initialize the Facebook Plugin will cause your app to crash.</p>
+
+  <p>For more information, see</p>
+  <small><pre>app/controllers/facebook.coffee</pre></small>
+
+  <h3>
+    Facebook login status: <br>
+    <small>{{facebookLoginStatus}}</small>
+  </h3>
+
+  <div ng-hide="facebookInitialized" class="topcoat-button--cta full center block" hm-tap="facebookInit()">Initialize Facebook Plugin</div>
+
+  <div ng-show="facebookInitialized">
+    <div class="topcoat-button full center block" hm-tap="facebookLogin()">Login to Facebook</div>
+    <div class="topcoat-button full center block" hm-tap="facebookFetch()">Fetch Friends from Graph API</div>
+    <div class="topcoat-button full center block" hm-tap="facebookDialog()">Show Facebook Dialog</div>
+    <div class="topcoat-button full center block" hm-tap="facebookLogout()">Logout from Facebook</div>
+  </div>
+
 </div>
-               
