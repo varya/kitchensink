@@ -6,7 +6,7 @@
   },
   {
     "example_id": 2,
-    "name": "Facebook Login (via plugin, iOS only)",
+    "name": "Facebook Plugin (iOS only)",
     "url": "/views/facebook/plugin.html"
   },
   {
