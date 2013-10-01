@@ -24,7 +24,6 @@ facebookApp.controller 'PluginCtrl', ($scope)->
     FB.init
       appId: $scope.appId
       nativeInterface: CDV.FB
-      useCachedDialogs: false
 
     $scope.facebookInitialized = true
     $scope.getFacebookLoginStatus()
