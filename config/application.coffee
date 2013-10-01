@@ -50,7 +50,7 @@ steroids.config.tabBar.tabs = [
   {
     title: "Steroids"
     icon: "icons/pill@2x.png"
-    location: "http://localhost/views/facebook/plugin.html"
+    location: "http://localhost/views/example/steroidsIndex.html"
   },
   {
     title: "Cordova"
