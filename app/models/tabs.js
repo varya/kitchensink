@@ -8,9 +8,9 @@ if ( typeof angular == 'undefined' ) {
 };
 
 
-var cordovaModule = angular.module('ExampleModel', ['restangular']);
+var tabsModule = angular.module('TabsModel', ['restangular']);
 
-cordovaModule.factory('ExampleRestangular', function(Restangular) {
+tabsModule.factory('TabsRestangular', function(Restangular) {
 
   return Restangular.withConfig(function(RestangularConfigurer) {
 

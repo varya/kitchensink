@@ -50,12 +50,12 @@ steroids.config.tabBar.tabs = [
   {
     title: "Steroids"
     icon: "icons/pill@2x.png"
-    location: "http://localhost/views/example/steroidsIndex.html"
+    location: "http://localhost/views/tabs/steroids.html"
   },
   {
     title: "Cordova"
     icon: "icons/telescope@2x.png"
-    location: "http://localhost/views/example/cordovaIndex.html"
+    location: "http://localhost/views/tabs/cordova.html"
   }
 ]
 
@@ -79,7 +79,7 @@ steroids.config.navigationBar.tintColor = "#00aeef"
 steroids.config.navigationBar.titleColor = "#ffffff"
 steroids.config.navigationBar.titleShadowColor = "#000000"
 
-steroids.config.navigationBar.buttonTintColor = "#363636"
+steroids.config.navigationBar.buttonTintColor = "#ffffff"
 steroids.config.navigationBar.buttonTitleColor = "#ffffff"
 steroids.config.navigationBar.buttonShadowColor = "#000000"
 
