@@ -1,3 +1,8 @@
+# NOTE: the correct plugin tag in www/config.ios.xml is
+#   <plugin name="com.cordova.barcodeScanner" value="CDVBarcodeScanner" />
+#
+# Make sure it is correct!
+
 barcodeApp = angular.module "barcodeApp", ["hmTouchevents"]
 
 barcodeApp.controller "IndexCtrl", ($scope)->
