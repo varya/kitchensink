@@ -1,18 +1,16 @@
-<script src="/javascripts/plugins/Calendar.js"></script>
-
 <div ng-controller="IndexCtrl" class="content-padded">
   <h3>Calendar status: {{calendarStatus}}</h3>
-  
+
   <h2>Calendar Event Data</h2>
   <label>Event Title</label>
   <input type="text" ng-model="event.title" class="topcoat-text-input full" required>
 
   <label>Event Location</label>
   <input type="text" ng-model="event.location" class="topcoat-text-input full" required>
-  
+
   <label>Event Notes</label>
   <input type="text" ng-model="event.notes" class="topcoat-text-input full" required>
-  
+
   <label>
     Event Start Date<br>
     <small><em>(Format: <code>yyyy-mm-dd hh:mm:ss</code>)</em></small>
@@ -24,7 +22,7 @@
     <small><em>(Format: <code>yyyy-mm-dd hh:mm:ss</code>)</em></small>
   </label>
   <input type="text" ng-model="event.endDate" class="topcoat-text-input full" required>
-  
+
   <h2>Create Event</h2>
   <p>Create a new calendar event with the above data.</p>
   <div class="topcoat-button full center" hm-tap="createEvent()">Create Event</div>
@@ -36,8 +34,8 @@
   <h2>Delete Calendar Event</h2>
   <p>Delete all calendar events matching the above data. Start and end date define search interval.</p>
   <div class="topcoat-button full center" hm-tap="deleteEvent()">Delete Events</div>
-  
+
   <h2>
-  
+
 
 </div>
