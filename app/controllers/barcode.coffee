@@ -22,7 +22,7 @@ barcodeApp.controller "IndexCtrl", ($scope)->
   # clicks the right navigation bar button.
 
   scan = ->
-    scanner = new BarcodeScanner()
+    scanner = cordova.plugins.barcodeScanner
 
     scanner.scan (result)->
       label = document.getElementById "barcode"
