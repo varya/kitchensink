@@ -53,6 +53,11 @@ steroids.config.tabBar.tabs = [
     location: "http://localhost/views/tabs/steroids.html"
   },
   {
+    title: "Steroids Addons"
+    icon: "icons/pill@2x.png"
+    location: "http://localhost/views/tabs/steroids-addons.html"
+  },
+  {
     title: "Cordova"
     icon: "icons/telescope@2x.png"
     location: "http://localhost/views/tabs/cordova.html"
