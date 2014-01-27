@@ -1,7 +1,7 @@
 [
   {
     "example_id": 1,
-    "name": "Facebook Plugin",
-    "url": "/views/facebook/plugin.html"
+    "name": "Facebook Addon",
+    "url": "/views/facebook-addon/facebook-addon.html"
   }
 ]

@@ -1,0 +1,18 @@
+<div ng-app="facebookAddonApp">
+  <div ng-controller="SteroidsFacebookAddonCtrl">
+    <h1>Facebook Addon</h1>
+
+    <h2>Addon initialized: {{ ready }}</h2>
+
+    <h2>Facebook login status: {{ loginStatus }}</h2>
+
+    <div ng-show="ready">
+      <div ng-hide="loginStatus">
+        <div class="topcoat-button full center block" hm-tap="facebookLogin()">Login to Facebook</div>
+      </div>
+      <div ng-show="loginStatus">
+        <div class="topcoat-button full center block" hm-tap="facebookLogout()">Logout from Facebook</div>
+      </div>
+    </div>
+  </div>
+</div>

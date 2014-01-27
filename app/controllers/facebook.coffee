@@ -100,3 +100,5 @@ facebookApp.controller 'WebCtrl', ($scope)->
   $scope.queryName = ->
     FB.api '/me', (response)->
       alert 'Your name is ' + response.name
+
+
