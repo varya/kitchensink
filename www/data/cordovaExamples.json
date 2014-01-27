@@ -6,16 +6,11 @@
   },
   {
     "example_id": 2,
-    "name": "Facebook Plugin (iOS only)",
-    "url": "/views/facebook/plugin.html"
-  },
-  {
-    "example_id": 3,
     "name": "Echo Plugin test",
     "url": "/views/echoPlugin/index.html"
   },
   {
-    "example_id": 4,
+    "example_id": 3,
     "name": "Barcode Scanner plugin",
     "url": "/views/barcode/index.html"
   }
