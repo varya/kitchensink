@@ -5,7 +5,7 @@ This work-in-progress project demonstrates the functionalities of the [Steroids.
 
 ## Running
 
-Install Steroids npm with [these instructions](http://guides.appgyver.com/steroids/guides/steroids_npm/installing/).
+Install Steroids CLI with [these instructions](http://guides.appgyver.com/steroids/guides/steroids_npm/installing/).
 
 Run with
 
