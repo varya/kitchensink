@@ -1,4 +1,4 @@
-/*! steroids-js - v3.1.3 - 2014-01-02 12:49 */
+/*! steroids-js - v3.1.8 - 2014-04-03 14:29 */
 (function(window){
 var Bridge,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
@@ -643,6 +643,22 @@ Device = (function() {
 
   Device.prototype.torch = new Torch();
 
+  Device.prototype.platform = {
+    getName: function(options, callbacks) {
+      var name;
+      if (options == null) {
+        options = {};
+      }
+      if (callbacks == null) {
+        callbacks = {};
+      }
+      name = typeof AndroidAPIBridge !== 'undefined' ? "android" : navigator.userAgent.indexOf("Tizen") !== -1 ? "tizen" : navigator.userAgent.match(/(iPod|iPhone|iPad)/) ? "ios" : void 0;
+      if (callbacks.onSuccess != null) {
+        return callbacks.onSuccess(name);
+      }
+    }
+  };
+
   Device.prototype.ping = function(options, callbacks) {
     var data;
     if (options == null) {
@@ -757,18 +773,11 @@ Animation = (function() {
   }
 
   Animation.prototype.perform = function(options, callbacks) {
-    var _ref, _ref1;
     if (options == null) {
       options = {};
     }
     if (callbacks == null) {
       callbacks = {};
-    }
-    if (window.orientation !== 0 && ((_ref = this.transition) === "slideFromRight" || _ref === "slideFromLeft" || _ref === "slideFromTop" || _ref === "slideFromBottom")) {
-      if ((_ref1 = callbacks.onFailure) != null) {
-        _ref1.call();
-      }
-      return;
     }
     return steroids.nativeBridge.nativeCall({
       method: "performTransition",
@@ -777,7 +786,8 @@ Animation = (function() {
         curve: options.curve || this.curve,
         duration: options.duration || this.duration
       },
-      successCallbacks: [callbacks.onSuccess],
+      successCallbacks: [callbacks.onSuccess, callbacks.onAnimationStarted],
+      recurringCallbacks: [callbacks.onAnimationEnded],
       failureCallbacks: [callbacks.onFailure]
     });
   };
@@ -795,6 +805,31 @@ App = (function() {
   App.prototype.absolutePath = void 0;
 
   App.prototype.absoluteUserFilesPath = void 0;
+
+  App.prototype.host = {
+    getURL: function(options, callbacks) {
+      var betterResponseCb;
+      if (options == null) {
+        options = {};
+      }
+      if (callbacks == null) {
+        callbacks = {};
+      }
+      betterResponseCb = function(hostObj) {
+        var aElem, actualURL;
+        actualURL = "http://" + hostObj.endpointURL;
+        aElem = document.createElement("a");
+        aElem.href = actualURL;
+        return callbacks.onSuccess(aElem.origin);
+      };
+      return steroids.nativeBridge.nativeCall({
+        method: "getEndpointURL",
+        parameters: {},
+        successCallbacks: [betterResponseCb],
+        failureCallbacks: [callbacks.onFailure]
+      });
+    }
+  };
 
   function App() {
     var _this = this;
@@ -834,6 +869,35 @@ App = (function() {
     return window.AG_STEROIDS_SCANNER_URL;
   };
 
+  App.prototype.getMode = function(options, callbacks) {
+    var mode;
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    mode = navigator.userAgent.match(/(StandAlonePackage)/) ? "standalone" : "scanner";
+    if (callbacks.onSuccess != null) {
+      return callbacks.onSuccess(mode);
+    }
+  };
+
+  App.prototype.getNSUserDefaults = function(options, callbacks) {
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    return steroids.nativeBridge.nativeCall({
+      method: "getNSUserDefaults",
+      parameters: {},
+      successCallbacks: [callbacks.onSuccess],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
   return App;
 
 })();
@@ -867,9 +931,8 @@ Modal = (function() {
         } : {
           url: view.location
         };
-        if (options.keepLoading === true) {
-          parameters.keepTransitionHelper = true;
-        }
+        parameters.keepTransitionHelper = options.keepLoading;
+        parameters.disableAnimation = options.disableAnimation;
         return steroids.nativeBridge.nativeCall({
           method: "openModal",
           parameters: parameters,
@@ -1090,25 +1153,18 @@ DrawerCollection = (function() {
 ;var LayerCollection;
 
 LayerCollection = (function() {
-  function LayerCollection() {
-    this.array = [];
-  }
+  function LayerCollection() {}
 
   LayerCollection.prototype.pop = function(options, callbacks) {
-    var defaultOnSuccess,
-      _this = this;
     if (options == null) {
       options = {};
     }
     if (callbacks == null) {
       callbacks = {};
     }
-    defaultOnSuccess = function() {
-      return _this.array.pop();
-    };
     return steroids.nativeBridge.nativeCall({
       method: "popLayer",
-      successCallbacks: [defaultOnSuccess, callbacks.onSuccess],
+      successCallbacks: [callbacks.onSuccess],
       failureCallbacks: [callbacks.onFailure]
     });
   };
@@ -1128,17 +1184,13 @@ LayerCollection = (function() {
   };
 
   LayerCollection.prototype.push = function(options, callbacks) {
-    var defaultOnSuccess, parameters, view,
-      _this = this;
+    var parameters, view;
     if (options == null) {
       options = {};
     }
     if (callbacks == null) {
       callbacks = {};
     }
-    defaultOnSuccess = function() {
-      return _this.array.push(view);
-    };
     view = options.constructor.name === "WebView" ? options : options.view;
     parameters = view.id != null ? {
       id: view.id
@@ -1165,14 +1217,13 @@ LayerCollection = (function() {
     return steroids.nativeBridge.nativeCall({
       method: "openLayer",
       parameters: parameters,
-      successCallbacks: [defaultOnSuccess, callbacks.onSuccess],
+      successCallbacks: [callbacks.onSuccess],
       failureCallbacks: [callbacks.onFailure]
     });
   };
 
   LayerCollection.prototype.replace = function(options, callbacks) {
-    var defaultOnSuccess, parameters, view,
-      _this = this;
+    var parameters, view;
     if (options == null) {
       options = {};
     }
@@ -1180,10 +1231,6 @@ LayerCollection = (function() {
       callbacks = {};
     }
     steroids.debug("steroids.layers.replace called");
-    defaultOnSuccess = function() {
-      steroids.debug("steroids.layers.replace defaultOnSuccess");
-      return _this.array = [view];
-    };
     view = options.constructor.name === "WebView" ? (steroids.debug("steroids.layers.replace using view shorthand"), options) : (steroids.debug("steroids.layers.replace using longhand"), options.view);
     parameters = {};
     if (view.id != null) {
@@ -1196,12 +1243,142 @@ LayerCollection = (function() {
     return steroids.nativeBridge.nativeCall({
       method: "replaceLayers",
       parameters: parameters,
-      successCallbacks: [defaultOnSuccess, callbacks.onSuccess],
+      successCallbacks: [callbacks.onSuccess],
       failureCallbacks: [callbacks.onFailure]
     });
   };
 
   return LayerCollection;
+
+})();
+;var Logger;
+
+Logger = (function() {
+  var LogMessage, LogMessageQueue;
+
+  LogMessage = (function() {
+    function LogMessage(message) {
+      this.message = message;
+      this.location = window.location.href;
+      this.screen_id = window.AG_SCREEN_ID;
+      this.layer_id = window.AG_LAYER_ID;
+      this.view_id = window.AG_VIEW_ID;
+      this.date = new Date();
+    }
+
+    LogMessage.prototype.asJSON = function() {
+      var err, messageJSON, obj;
+      try {
+        messageJSON = JSON.stringify(this.message);
+      } catch (_error) {
+        err = _error;
+        messageJSON = err.toString();
+      }
+      obj = {
+        message: messageJSON,
+        location: this.location,
+        date: this.date.toJSON(),
+        screen_id: this.screen_id,
+        layer_id: this.layer_id,
+        view_id: this.view_id
+      };
+      return obj;
+    };
+
+    return LogMessage;
+
+  })();
+
+  LogMessageQueue = (function() {
+    function LogMessageQueue() {
+      this.messageQueue = [];
+    }
+
+    LogMessageQueue.prototype.push = function(logMessage) {
+      return this.messageQueue.push(logMessage);
+    };
+
+    LogMessageQueue.prototype.flush = function() {
+      var logMessage, xhr;
+      if (steroids.logger.logEndpoint == null) {
+        return false;
+      }
+      while ((logMessage = this.messageQueue.pop())) {
+        xhr = new XMLHttpRequest();
+        xhr.open("POST", steroids.logger.logEndpoint, true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify(logMessage.asJSON()));
+      }
+      return true;
+    };
+
+    LogMessageQueue.prototype.autoFlush = function(every) {
+      var _this = this;
+      return steroids.app.getMode({}, {
+        onSuccess: function(mode) {
+          if (mode !== "scanner") {
+            return;
+          }
+          return steroids.logger.queue.startFlushing(every);
+        }
+      });
+    };
+
+    LogMessageQueue.prototype.startFlushing = function(every) {
+      var _this = this;
+      if (this.flushingInterval != null) {
+        return false;
+      }
+      this.flushingInterval = window.setInterval(function() {
+        return _this.flush();
+      }, every);
+      return true;
+    };
+
+    LogMessageQueue.prototype.stopFlushing = function() {
+      if (this.flushingInterval == null) {
+        return false;
+      }
+      window.clearInterval(this.flushingInterval);
+      this.flushingInterval = void 0;
+      return true;
+    };
+
+    LogMessageQueue.prototype.getLength = function() {
+      return this.messageQueue.length;
+    };
+
+    return LogMessageQueue;
+
+  })();
+
+  function Logger() {
+    var _this = this;
+    this.messages = [];
+    this.queue = new LogMessageQueue;
+    steroids.app.host.getURL({}, {
+      onSuccess: function(url) {
+        return _this.logEndpoint = "" + url + "/__appgyver/logger";
+      }
+    });
+  }
+
+  Logger.prototype.log = function(message) {
+    var logMessage,
+      _this = this;
+    logMessage = new LogMessage(message);
+    this.messages.push(logMessage);
+    return steroids.app.getMode({}, {
+      onSuccess: function(mode) {
+        if (mode !== "scanner") {
+          return;
+        }
+        return _this.queue.push(logMessage);
+      }
+    });
+  };
+
+  return Logger;
 
 })();
 ;var NavigationBarButton;
@@ -1213,7 +1390,26 @@ NavigationBarButton = (function() {
     }
     this.title = options.title;
     this.onTap = options.onTap;
+    this.imagePath = options.imagePath;
   }
+
+  NavigationBarButton.prototype.toParams = function() {
+    var params, relativeTo;
+    params = {};
+    if (this.title != null) {
+      params.title = this.title;
+    } else {
+      relativeTo = steroids.app.path;
+      params.imagePath = relativeTo + this.imagePath;
+    }
+    return params;
+  };
+
+  NavigationBarButton.prototype.getCallback = function() {
+    if (this.onTap != null) {
+      return this.onTap;
+    }
+  };
 
   return NavigationBarButton;
 
@@ -1233,16 +1429,19 @@ NavigationBar = (function() {
     if (callbacks == null) {
       callbacks = {};
     }
+    options.animated = options.animated != null;
+    options.visible = false;
     return steroids.nativeBridge.nativeCall({
-      method: "hideNavigationBar",
-      parameters: {},
+      method: "setNavigationBarVisibility",
+      parameters: options,
       successCallbacks: [callbacks.onSuccess],
       failureCallbacks: [callbacks.onFailure]
     });
   };
 
   NavigationBar.prototype.show = function(options, callbacks) {
-    var _this = this;
+    var title,
+      _this = this;
     if (options == null) {
       options = {};
     }
@@ -1250,23 +1449,34 @@ NavigationBar = (function() {
       callbacks = {};
     }
     steroids.debug("steroids.navigationBar.show options: " + (JSON.stringify(options)) + " callbacks: " + (JSON.stringify(callbacks)));
-    return steroids.on("ready", function() {
-      var parameters, relativeTo, _ref;
-      relativeTo = (_ref = options.relativeTo) != null ? _ref : steroids.app.path;
-      parameters = options.constructor.name === "Object" ? options.title != null ? {
-        title: options.title
-      } : {
-        titleImagePath: relativeTo + options.titleImagePath
-      } : {
-        title: options
-      };
+    title = options.constructor.name === "String" ? options : options.title;
+    if (title || options.titleImagePath) {
+      return steroids.on("ready", function() {
+        var parameters, relativeTo, _ref;
+        relativeTo = (_ref = options.relativeTo) != null ? _ref : steroids.app.path;
+        parameters = title ? {
+          title: title
+        } : {
+          titleImagePath: relativeTo + options.titleImagePath
+        };
+        return steroids.nativeBridge.nativeCall({
+          method: "showNavigationBar",
+          parameters: parameters,
+          successCallbacks: [callbacks.onSuccess],
+          failureCallbacks: [callbacks.onFailure]
+        });
+      });
+    } else {
       return steroids.nativeBridge.nativeCall({
-        method: "showNavigationBar",
-        parameters: parameters,
+        method: "setNavigationBarVisibility",
+        parameters: {
+          visible: true,
+          animated: options.animated != null
+        },
         successCallbacks: [callbacks.onSuccess],
         failureCallbacks: [callbacks.onFailure]
       });
-    });
+    }
   };
 
   NavigationBar.prototype.setButtons = function(options, callbacks) {
@@ -1348,67 +1558,147 @@ NavigationBar = (function() {
   };
 
   NavigationBar.prototype.buttonTapped = function(options) {
-    return this.buttonCallbacks[options.location][options.index]();
+    var _name, _ref;
+    return (_ref = this.buttonCallbacks[options.location]) != null ? typeof _ref[_name = options.index] === "function" ? _ref[_name]() : void 0 : void 0;
   };
 
-  return NavigationBar;
+  NavigationBar.prototype.setAppearance = (function() {
+    var appearancePropertyNames, camelcasedNavBarAppearancePropertyName, optionsToAppearanceParams, ucfirst;
+    appearancePropertyNames = ['portraitBackgroundImage', 'landscapeBackgroundImage', 'tintColor', 'titleTextColor', 'titleShadowColor', 'buttonTintColor', 'buttonTitleTextColor', 'buttonTitleShadowColor'];
+    camelcasedNavBarAppearancePropertyName = function(appearancePropertyName) {
+      return 'navBar' + ucfirst(appearancePropertyName);
+    };
+    ucfirst = function(string) {
+      if ((string != null ? string.length : void 0) > 0) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      } else {
+        return "";
+      }
+    };
+    optionsToAppearanceParams = function(options) {
+      var appearance, propertyName, _i, _len;
+      appearance = {};
+      for (_i = 0, _len = appearancePropertyNames.length; _i < _len; _i++) {
+        propertyName = appearancePropertyNames[_i];
+        if (options[propertyName] != null) {
+          appearance[camelcasedNavBarAppearancePropertyName(propertyName)] = options[propertyName];
+        }
+      }
+      return {
+        appearance: appearance
+      };
+    };
+    return function(options, callbacks) {
+      if (options == null) {
+        options = {};
+      }
+      if (callbacks == null) {
+        callbacks = {};
+      }
+      steroids.debug("steroids.navigationBar.setAppearance options: " + (JSON.stringify(options)) + " callbacks: " + (JSON.stringify(callbacks)));
+      return steroids.on("ready", function() {
+        return steroids.nativeBridge.nativeCall({
+          method: "setAppearance",
+          parameters: optionsToAppearanceParams(options),
+          successCallbacks: [callbacks.onSuccess],
+          failureCallbacks: [callbacks.onFailure]
+        });
+      });
+    };
+  })();
 
-})();
-;var BounceShadow;
-
-BounceShadow = (function() {
-  function BounceShadow() {}
-
-  BounceShadow.prototype.hide = function(options, callbacks) {
+  NavigationBar.prototype.update = function(options, callbacks) {
+    var _this = this;
     if (options == null) {
       options = {};
     }
     if (callbacks == null) {
       callbacks = {};
     }
-    return this.setVisibility({
-      visibility: false
-    }, callbacks);
-  };
-
-  BounceShadow.prototype.show = function(options, callbacks) {
-    if (options == null) {
-      options = {};
-    }
-    if (callbacks == null) {
-      callbacks = {};
-    }
-    return this.setVisibility({
-      visibility: true
-    }, callbacks);
-  };
-
-  BounceShadow.prototype.setVisibility = function(options, callbacks) {
-    var visibility;
-    if (options == null) {
-      options = {};
-    }
-    if (callbacks == null) {
-      callbacks = {};
-    }
-    visibility = options.constructor.name === "String" ? options : options.visibility;
-    return steroids.nativeBridge.nativeCall({
-      method: "setWebViewBounceShadowVisibility",
-      parameters: {
-        visibility: visibility
-      },
-      successCallbacks: [callbacks.onSuccess],
-      failureCallbacks: [callbacks.onFailure]
+    steroids.debug("steroids.navigationBar.update options: " + (JSON.stringify(options)) + " callbacks: " + (JSON.stringify(callbacks)));
+    return steroids.on("ready", function() {
+      var button, callback, location, locations, parameters, params, relativeTo, _i, _j, _len, _len1, _ref;
+      relativeTo = steroids.app.path;
+      params = {};
+      if (options.constructor.name === "String") {
+        params.title = options;
+      }
+      if (options.title != null) {
+        params.title = options.title;
+        params.titleImagePath = "";
+      }
+      if (options.titleImagePath != null) {
+        if (options.title == null) {
+          params.titleImagePath = relativeTo + options.titleImagePath;
+          params.title = "";
+        }
+      }
+      if (options.overrideBackButton != null) {
+        params.overrideBackButton = options.overrideBackButton;
+      }
+      if (options.backButton != null) {
+        params.backButton = options.backButton.toParams();
+      }
+      if (options.buttons != null) {
+        locations = ["right", "left"];
+        for (_i = 0, _len = locations.length; _i < _len; _i++) {
+          location = locations[_i];
+          if (options.buttons[location] != null) {
+            if (params.buttons == null) {
+              params.buttons = {};
+            }
+            if (_this.buttonCallbacks == null) {
+              _this.buttonCallbacks = {};
+            }
+            steroids.debug("steroids.navigationBar.update constructing location " + location);
+            _this.buttonCallbacks[location] = [];
+            params.buttons[location] = [];
+            _ref = options.buttons[location];
+            for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+              button = _ref[_j];
+              parameters = button.toParams();
+              callback = button.getCallback();
+              steroids.debug("steroids.navigationBar.update adding button " + (JSON.stringify(parameters)) + " to location " + location);
+              params.buttons[location].push(parameters);
+              _this.buttonCallbacks[location].push(callback);
+            }
+          }
+        }
+      }
+      return steroids.nativeBridge.nativeCall({
+        method: "updateNavigationBar",
+        parameters: params,
+        successCallbacks: [callbacks.onSuccess],
+        recurringCallbacks: [_this.buttonTapped],
+        failureCallbacks: [callbacks.onFailure]
+      });
     });
   };
 
-  return BounceShadow;
+  return NavigationBar;
 
 })();
 ;var StatusBar;
 
 StatusBar = (function() {
   function StatusBar() {}
+
+  StatusBar.prototype.onTap = function(options, callbacks) {
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    this.onTap = options;
+    return steroids.nativeBridge.nativeCall({
+      method: "setupStatusBarOnTap",
+      parameters: {},
+      successCallbacks: [callbacks.onSuccess],
+      recurringCallbacks: [this.onTap],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
 
   StatusBar.prototype.hide = function(options, callbacks) {
     if (options == null) {
@@ -1451,6 +1741,47 @@ StatusBar = (function() {
   return StatusBar;
 
 })();
+;var Splashscreen;
+
+Splashscreen = (function() {
+  function Splashscreen() {}
+
+  Splashscreen.prototype.show = function(options, callbacks) {
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    return this.setVisibility(true, callbacks);
+  };
+
+  Splashscreen.prototype.hide = function(options, callbacks) {
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    return this.setVisibility(false, callbacks);
+  };
+
+  Splashscreen.prototype.setVisibility = function(visibility, callbacks) {
+    var options;
+    options = {
+      visible: visibility
+    };
+    return steroids.nativeBridge.nativeCall({
+      method: "setSplashScreenVisibility",
+      parameters: options,
+      successCallbacks: [callbacks.onSuccess],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
+  return Splashscreen;
+
+})();
 ;var TabBar;
 
 TabBar = (function() {
@@ -1488,6 +1819,42 @@ TabBar = (function() {
     });
   };
 
+  TabBar.prototype.selectTab = function(options, callbacks) {
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    steroids.debug("steroids.tabBar.selectTab options: " + (JSON.stringify(options)) + " callbacks: " + (JSON.stringify(callbacks)));
+    this.index = options.constructor.name === "Number" ? options : options.index;
+    return steroids.nativeBridge.nativeCall({
+      method: "selectTab",
+      parameters: {
+        index: this.index
+      },
+      successCallbacks: [callbacks.onSuccess],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
+  TabBar.prototype.currentTab = {
+    update: function(options, callbacks) {
+      if (options == null) {
+        options = {};
+      }
+      if (callbacks == null) {
+        callbacks = {};
+      }
+      return steroids.nativeBridge.nativeCall({
+        method: "updateTab",
+        parameters: options,
+        successCallbacks: [callbacks.onSuccess],
+        failureCallbacks: [callbacks.onFailure]
+      });
+    }
+  };
+
   TabBar.prototype.update = function(options, callbacks) {
     var parameters, scale, _i, _ref;
     if (options == null) {
@@ -1503,7 +1870,8 @@ TabBar = (function() {
       for (scale = _i = 0, _ref = options.tabs.length; 0 <= _ref ? _i < _ref : _i > _ref; scale = 0 <= _ref ? ++_i : --_i) {
         parameters.tabs.push({
           title: options.tabs[scale].title,
-          image_path: options.tabs[scale].icon
+          image_path: options.tabs[scale].icon,
+          badge: options.tabs[scale].badge
         });
       }
     }
@@ -1531,8 +1899,6 @@ WebView = (function() {
   WebView.prototype.allowedRotations = null;
 
   WebView.prototype.navigationBar = new NavigationBar;
-
-  WebView.prototype.bounceShadow = new BounceShadow;
 
   function WebView(options) {
     if (options == null) {
@@ -1626,6 +1992,20 @@ WebView = (function() {
     });
   };
 
+  WebView.prototype.displayLoading = function(options, callbacks) {
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    return steroids.nativeBridge.nativeCall({
+      method: "displayTransitionHelper",
+      successCallbacks: [callbacks.onSuccess],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
   WebView.prototype.setAllowedRotations = function(options, callbacks) {
     var _ref,
       _this = this;
@@ -1646,6 +2026,25 @@ WebView = (function() {
     return (_ref = callbacks.onSuccess) != null ? _ref.call() : void 0;
   };
 
+  WebView.prototype.rotateTo = function(options, callbacks) {
+    var degrees;
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    degrees = options.constructor.name === "String" ? options : options.degrees;
+    return steroids.nativeBridge.nativeCall({
+      method: "rotateTo",
+      parameters: {
+        orientation: degrees
+      },
+      successCallbacks: [callbacks.onSuccess],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
   WebView.prototype.setBackgroundColor = function(options, callbacks) {
     var newColor;
     if (options == null) {
@@ -1660,6 +2059,26 @@ WebView = (function() {
       parameters: {
         color: newColor
       },
+      successCallbacks: [callbacks.onSuccess],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
+  WebView.prototype.updateKeyboard = function(options, callbacks) {
+    var params;
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    params = {};
+    if (options.accessoryBarEnabled != null) {
+      params.accessoryBarEnabled = options.accessoryBarEnabled;
+    }
+    return steroids.nativeBridge.nativeCall({
+      method: "updateKeyboard",
+      parameters: params,
       successCallbacks: [callbacks.onSuccess],
       failureCallbacks: [callbacks.onFailure]
     });
@@ -1842,7 +2261,7 @@ AuthorizationCodeFlow = (function(_super) {
       location: authorizationUrl
     });
     return steroids.modal.show({
-      layer: authenticationLayer
+      view: authenticationLayer
     });
   };
 
@@ -1852,7 +2271,7 @@ AuthorizationCodeFlow = (function(_super) {
     this.xhrAccessTokenParams = {
       client_id: this.options.clientID,
       client_secret: this.options.clientSecret,
-      redirect_uri: this.callbackUrl,
+      redirect_uri: this.options.callbackUrl,
       grant_type: "authorization_code"
     };
     request = new XMLHttpRequest();
@@ -2510,6 +2929,7 @@ PostMessage = (function() {
         javascript: "steroids.PostMessage.dispatchMessageEvent('" + escapedJSONMessage + "', '*');"
       },
       successCallbacks: [],
+      failureCallbacks: [],
       recurringCallbacks: []
     });
   };
@@ -2526,7 +2946,7 @@ PostMessage = (function() {
 
 }).call(this);
 ;window.steroids = {
-  version: "3.1.3",
+  version: "3.1.8",
   Animation: Animation,
   File: File,
   views: {
@@ -2640,8 +3060,18 @@ window.steroids.screen = new Screen;
 
 window.steroids.notifications = new Notifications;
 
+window.steroids.splashscreen = new Splashscreen;
+
 window.steroids.PostMessage = PostMessage;
 
 window.postMessage = PostMessage.postMessage;
+
+window.steroids.logger = new Logger;
+
+window.steroids.logger.queue.autoFlush(100);
+
+window.addEventListener("error", function(error, url, lineNumber) {
+  return steroids.logger.log("" + error.message + " - " + url + ":" + lineNumber);
+});
 
 })(window);
