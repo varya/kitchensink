@@ -15,7 +15,7 @@ barcodeApp.controller "IndexCtrl", ($scope)->
     scan()
 
   # Assign the button to the navigation bar
-  steroids.view.navigationBar.setButtons
+  steroids.view.navigationBar.update
     right: [navButton]
 
   # Prompts the user to scan a barcode. Called when the user

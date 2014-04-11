@@ -48,10 +48,6 @@ drawerApp.controller 'IndexCtrl', ($scope)->
     disabledView = new steroids.views.WebView("/views/drawer/disabled.html")
     steroids.layers.push(disabledView)
 
-  document.addEventListener "visibilitychange", ->
-    if !document.hidden and $scope.gestureEnabled
-      steroids.drawers.enableGesture(leftDrawer)
-
 drawerApp.controller 'DrawerCtrl', ($scope)->
 
   $scope.closeDrawerAndSendMessage = (selection)->
@@ -64,9 +60,3 @@ drawerApp.controller 'DrawerCtrl', ($scope)->
 
   $scope.openGoogle = ()->
     steroids.openURL("http://www.google.com")
-
-drawerApp.controller 'DisabledCtrl', ($scope)->
-
-  document.addEventListener "visibilitychange", ->
-    if !document.hidden
-      steroids.drawers.disableGesture()
