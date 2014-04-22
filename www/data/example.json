@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Camera and userFilesPath",
+    "url": "/views/camera/index.html"
+  },
+  {
+    "id": 2,
+    "name": "Animation",
+    "url": "/views/animation/index.html"
+  },
+  {
+    "id": 3,
+    "name": "Barcode Scanner plugin",
+    "url": "/views/barcode/index.html"
+  }
+]

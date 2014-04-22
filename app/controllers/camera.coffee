@@ -1,7 +1,7 @@
 document.addEventListener "deviceready", ->
   angular.bootstrap document, ['cameraApp']
 
-cameraApp = angular.module 'cameraApp', ['hmTouchevents']
+cameraApp = angular.module 'cameraApp', ['ngTouch']
 
 cameraApp.controller 'IndexCtrl', ($scope)->
 

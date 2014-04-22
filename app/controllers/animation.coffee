@@ -1,7 +1,4 @@
-document.addEventListener "deviceready", ->
-  angular.bootstrap document, ['animationApp']
-
-animationApp = angular.module 'animationApp', ['hmTouchevents']
+animationApp = angular.module 'animationApp', ['ngTouch']
 
 animationApp.controller 'IndexCtrl', ($scope)->
 

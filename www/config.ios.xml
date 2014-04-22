@@ -1,12 +1,11 @@
-<widget id="com.appgyver.kitchensink" version="2.0.0" xmlns="http://www.w3.org/ns/widgets">
-    <name>Steroids Kitchensink</name>
-    <description>
-        Steroids kitchensink application.
-    </description>
-    <author email="contact@appgyver.com" href="http://www.appgyver.com/steroids">
-        AppGyver Steroids Team
-    </author>
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.appgyver.helloSteroids" version="3.1.8" xmlns="http://www.w3.org/ns/widgets">
+    <!--
+      The following preferences are explained in more detail in the config.ios.xml guide:
+        http://guides.appgyver.com/steroids/guides/project_configuration/config-xml-ios/
+      -->
     <access origin="*" />
+
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="DisallowOverscroll" value="false" />
     <preference name="EnableViewportScale" value="false" />

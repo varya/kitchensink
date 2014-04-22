@@ -4,22 +4,22 @@
 steroids.config.name = "Steroids Kitchensink"
 
 # -- Initial Location --
-# steroids.config.location = "http://localhost/index.html"
+steroids.config.location = "http://localhost/views/example/index.html"
 
 # -- Tab Bar --
-steroids.config.tabBar.enabled = true
-steroids.config.tabBar.tabs = [
-  {
-    title: "Steroids"
-    icon: "icons/pill@2x.png"
-    location: "http://localhost/views/tabs/steroids.html"
-  },
-  {
-    title: "Cordova"
-    icon: "icons/telescope@2x.png"
-    location: "http://localhost/views/tabs/cordova.html"
-  }
-]
+# steroids.config.tabBar.enabled = true
+# steroids.config.tabBar.tabs = [
+#   {
+#     title: "Index"
+#     icon: "icons/pill@2x.png"
+#     location: "http://localhost/index.html"
+#   },
+#   {
+#     title: "Internet"
+#     icon: "icons/telescope@2x.png"
+#     location: "http://www.google.com"
+#   }
+# ]
 
 # steroids.config.tabBar.tintColor = "#000000"
 # steroids.config.tabBar.tabTitleColor = "#00aeef"
@@ -32,7 +32,6 @@ steroids.config.tabBar.tabs = [
 steroids.config.navigationBar.tintColor = "#00aeef"
 steroids.config.navigationBar.titleColor = "#ffffff"
 steroids.config.navigationBar.buttonTintColor = "#ffffff"
-steroids.config.navigationBar.buttonTitleColor = "#ffffff"
 
 # steroids.config.navigationBar.landscape.backgroundImage = ""
 # steroids.config.navigationBar.portrait.backgroundImage = ""
