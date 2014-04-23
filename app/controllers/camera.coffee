@@ -68,7 +68,7 @@ cameraApp.controller 'IndexCtrl', ($scope)->
 
     # Store the moved file's URL into $scope.imageSrc
     fileMoved = (file)->
-      # localhost serves files from both steroids.app.userFilesPath and steroids.app.path
-      $scope.imageSrc = "/" + file.name
+      # localhost serves files from both steroids.app.userFilesPath and steroids.app.path, add timestamp to circumvent cache issues
+      $scope.imageSrc = "/#{file.name}?#{(new Date()).getTime()}"
       $scope.showSpinner = false
       $scope.$apply()
