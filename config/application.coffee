@@ -21,7 +21,7 @@ steroids.config.tabBar.tabs = [
   {
     title: "Settings"
     icon: "icons/gear.png"
-    location: "http://localhost/views/example/settings.html"
+    location: "http://localhost/views/settings/index.html"
   }
 ]
 
