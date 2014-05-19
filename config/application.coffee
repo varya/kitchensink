@@ -15,12 +15,12 @@ steroids.config.tabBar.enabled = true
 steroids.config.tabBar.tabs = [
   {
     title: "Index"
-    icon: "icons/home.png"
+    icon: "vendor/iconbeast/home.png"
     location: "http://localhost/views/example/index.html"
   },
   {
     title: "Settings"
-    icon: "icons/gear.png"
+    icon: "vendor/iconbeast/gear.png"
     location: "http://localhost/views/settings/index.html"
   }
 ]
