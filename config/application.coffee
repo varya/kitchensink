@@ -7,19 +7,23 @@ steroids.config.name = "Steroids Kitchensink"
 steroids.config.location = "http://localhost/views/example/index.html"
 
 # -- Tab Bar --
-# steroids.config.tabBar.enabled = true
-# steroids.config.tabBar.tabs = [
-#   {
-#     title: "Index"
-#     icon: "icons/pill@2x.png"
-#     location: "http://localhost/index.html"
-#   },
-#   {
-#     title: "Internet"
-#     icon: "icons/telescope@2x.png"
-#     location: "http://www.google.com"
-#   }
-# ]
+# Credits:
+# Icons are taken free from IconBeast Lite
+# http://www.iconbeast.com
+
+steroids.config.tabBar.enabled = true
+steroids.config.tabBar.tabs = [
+  {
+    title: "Index"
+    icon: "icons/home.png"
+    location: "http://localhost/views/example/index.html"
+  },
+  {
+    title: "Settings"
+    icon: "icons/gear.png"
+    location: "http://localhost/views/example/settings.html"
+  }
+]
 
 # steroids.config.tabBar.tintColor = "#000000"
 # steroids.config.tabBar.tabTitleColor = "#00aeef"
