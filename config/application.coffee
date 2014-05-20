@@ -31,21 +31,29 @@ steroids.config.location = "http://localhost/views/example/index.html"
 # steroids.config.tabBar.selectedTabBackgroundImage = "icons/pill@2x.png"
 
 # steroids.config.tabBar.backgroundImage = ""
+#
 
-# -- Drawers
-steroids.config.drawers = 
-  right:
+steroids.config.preloads = [
+  {
     id: "rightDrawer"
     location: "http://localhost/views/settings/index.html"
-    showOnAppLoad: true
-    widthOfDrawerInPixels: 200
-  options:
-    centerViewInteractionMode: "Full"
-    closeGestures: ["PanNavBar", "PanCenterView", "TapCenterView"]
-    openGestures: ["PanNavBar", "PanCenterView"]
-    showShadow: true
-    stretchDrawer: true
-    widthOfLayerInPixels: 0
+  }
+]
+
+# -- Drawers
+#steroids.config.drawers = 
+#  right:
+#    id: "rightDrawer"
+#    location: "http://localhost/views/settings/index.html"
+#    showOnAppLoad: false
+#    widthOfDrawerInPixels: 200
+#  options:
+#    centerViewInteractionMode: "Full"
+#    closeGestures: ["PanNavBar", "PanCenterView", "TapCenterView"]
+#    openGestures: ["PanNavBar", "PanCenterView"]
+#    showShadow: true
+#    stretchDrawer: true
+#    widthOfLayerInPixels: 0
 
 
 # -- Navigation Bar --
