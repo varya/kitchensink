@@ -2,23 +2,27 @@ exampleApp = angular.module 'exampleApp', ['ExampleModel', 'ngTouch']
 
 exampleApp.controller 'IndexCtrl', ($scope, ExampleRestangular)->
 
-#  rightDrawerView = new steroids.views.WebView {location:"/views/settings/index.html", id:"rightDrawer"}
-#  window.ViewController = {
-#    rightDrawer: rightDrawerView
-#  }
-#
-#  updateDrawers = ()->
-#    steroids.drawers.update {
-#        right: ViewController.rightDrawer
-#      }
-#
-#  updateDrawers()
+  rightDrawerView = new steroids.views.WebView {location:"/views/settings/index.html", id:"rightDrawer"}
+  window.ViewController = {
+    rightDrawer: rightDrawerView
+  }
+
+  updateDrawers = ()->
+    steroids.drawers.update {
+        right: ViewController.rightDrawer
+      }
+
+  updateDrawers()
 
   $scope.open = (url)->
     if url == '/views/settings/index.html'
-      alert(5)
       steroids.drawers.show({
         edge: steroids.screen.edges.RIGHT
+      }, {
+        onSuccess: ()->
+          steroids.logger.log('success')
+        onFailure: ()->
+          steroids.logger.log('fail')
       })
       return
 
