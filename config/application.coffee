@@ -41,7 +41,7 @@ steroids.config.location = "http://localhost/views/example/index.html"
 #]
 
 # -- Drawers
-steroids.config.drawers = 
+steroids.config.drawers =
   right:
     id: "rightDrawer"
     location: "http://localhost/views/settings/index.html"
