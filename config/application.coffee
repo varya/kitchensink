@@ -17,11 +17,11 @@ steroids.config.tabBar.tabs = [
     title: "Index"
     icon: "vendor/iconbeast/home.png"
     location: "http://localhost/views/example/index.html"
-  },
-  {
-    title: "Settings"
-    icon: "vendor/iconbeast/gear.png"
-    location: "http://localhost/views/settings/index.html"
+#  },
+#  {
+#    title: "Settings"
+#    icon: "vendor/iconbeast/gear.png"
+#    location: "http://localhost/views/settings/index.html"
   }
 ]
 
