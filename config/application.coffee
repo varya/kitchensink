@@ -44,9 +44,9 @@ steroids.config.location = "http://localhost/views/example/index.html"
 steroids.config.drawers =
   right:
     id: "rightDrawer"
-    location: "http://localhost/views/settings/index.html"
+    location: "http://localhost/views/side-menu/index.html"
     showOnAppLoad: false
-    widthOfDrawerInPixels: 200
+    widthOfDrawerInPixels: 100
   options:
     centerViewInteractionMode: "Full"
     closeGestures: ["PanNavBar", "PanCenterView", "TapCenterView"]
