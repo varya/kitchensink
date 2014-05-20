@@ -31,13 +31,21 @@ steroids.config.location = "http://localhost/views/example/index.html"
 # steroids.config.tabBar.selectedTabBackgroundImage = "icons/pill@2x.png"
 
 # steroids.config.tabBar.backgroundImage = ""
+#
+
+#steroids.config.preloads = [
+#  {
+#    id: "rightDrawer"
+#    location: "http://localhost/views/settings/index.html"
+#  }
+#]
 
 # -- Drawers
-steroids.config.drawers = 
+steroids.config.drawers =
   right:
     id: "rightDrawer"
     location: "http://localhost/views/settings/index.html"
-    showOnAppLoad: true
+    showOnAppLoad: false
     widthOfDrawerInPixels: 200
   options:
     centerViewInteractionMode: "Full"

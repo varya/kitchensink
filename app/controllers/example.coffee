@@ -16,9 +16,13 @@ exampleApp.controller 'IndexCtrl', ($scope, ExampleRestangular)->
 
   $scope.open = (url)->
     if url == '/views/settings/index.html'
-      alert(5)
       steroids.drawers.show({
         edge: steroids.screen.edges.RIGHT
+      }, {
+        onSuccess: ()->
+          steroids.logger.log('success')
+        onFailure: ()->
+          steroids.logger.log('fail')
       })
       return
 
