@@ -32,6 +32,14 @@ steroids.config.tabBar.tabs = [
 
 # steroids.config.tabBar.backgroundImage = ""
 
+# -- Preloads --
+steroids.config.preloads = [
+  {
+    "id": "rightDrawer"
+    "url": "http://localhost/views/settings/index.html"
+  }
+]
+
 # -- Navigation Bar --
 steroids.config.navigationBar.tintColor = "#00aeef"
 steroids.config.navigationBar.titleColor = "#ffffff"
