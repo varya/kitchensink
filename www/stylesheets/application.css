@@ -1,3 +1,7 @@
+html, body {
+  height: 100%;
+}
+
 img#camera-photo {
   width:100%;
 }
@@ -9,4 +13,22 @@ img#camera-photo {
   -webkit-box-align: center;
   width:100%;
   font-size:50px;
+}
+
+
+.sidemenu {
+  background-color: red;
+  height: 100%;
+  padding: 15px;
+  display: table;
+}
+.sidemenu__i {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.tic-tac {
+    width: 30px;
+    height: 30px;
+    background-image:url(/vendor/iconbeast/tic-tac-toe.png);
 }
