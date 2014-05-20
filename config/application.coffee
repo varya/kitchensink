@@ -32,13 +32,21 @@ steroids.config.tabBar.tabs = [
 
 # steroids.config.tabBar.backgroundImage = ""
 
-# -- Preloads --
-steroids.config.preloads = [
-  {
-    "id": "rightDrawer"
-    "url": "http://localhost/views/settings/index.html"
-  }
-]
+# -- Drawers
+steroids.config.drawers = 
+  right:
+    id: "rightDrawer"
+    location: "http://localhost/views/settings/index.html"
+    showOnAppLoad: true
+    widthOfDrawerInPixels: 200
+  options:
+    centerViewInteractionMode: "Full"
+    closeGestures: ["PanNavBar", "PanCenterView", "TapCenterView"]
+    openGestures: ["PanNavBar", "PanCenterView"]
+    showShadow: true
+    stretchDrawer: true
+    widthOfLayerInPixels: 0
+
 
 # -- Navigation Bar --
 steroids.config.navigationBar.tintColor = "#00aeef"
