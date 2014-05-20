@@ -16,7 +16,7 @@
   },
   {
     "id": 4,
-    "name": "Settings",
-    "url": "/views/settings/index.html"
+    "name": "Side Menu",
+    "url": "/views/sidemenu/index.html"
   }
 ]

@@ -15,7 +15,7 @@ exampleApp.controller 'IndexCtrl', ($scope, ExampleRestangular)->
 #  updateDrawers()
 
   $scope.open = (url)->
-    if url == '/views/settings/index.html'
+    if url == '/views/sidemenu/index.html'
       steroids.drawers.show({
         edge: steroids.screen.edges.RIGHT
       }, {
