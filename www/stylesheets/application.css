@@ -20,15 +20,21 @@ img#camera-photo {
   background-color: red;
   height: 100%;
   padding: 15px;
-  display: table;
-}
-.sidemenu__i {
-  display: table-cell;
-  vertical-align: middle;
+  padding-top: 45px;
+  display: block;
 }
 
-.tic-tac {
+.tic-tac,
+.back
+{
     width: 30px;
     height: 30px;
+}
+.tic-tac
+{
     background-image:url(/vendor/iconbeast/tic-tac-toe.png);
+}
+.back
+{
+    background-image:url(/vendor/iconbeast/arrow-big-01.png);
 }
