@@ -40,6 +40,13 @@ steroids.config.location = "http://localhost/views/example/index.html"
 #  }
 #]
 
+steroids.config.preloads = [
+  {
+    id: "tictacDrawer"
+    location: "http://localhost/views/tictac/index.html"
+  }
+]
+
 # -- Drawers
 steroids.config.drawers =
   right:
