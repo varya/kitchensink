@@ -11,19 +11,19 @@ steroids.config.location = "http://localhost/views/example/index.html"
 # Icons are taken free from IconBeast Lite
 # http://www.iconbeast.com
 
-#steroids.config.tabBar.enabled = true
-#steroids.config.tabBar.tabs = [
-#  {
-#    title: "Index"
-#    icon: "vendor/iconbeast/home.png"
-#    location: "http://localhost/views/example/index.html"
-#  },
-#  {
-#    title: "Settings"
-#    icon: "vendor/iconbeast/gear.png"
-#    location: "http://localhost/views/settings/index.html"
-#  }
-#]
+steroids.config.tabBar.enabled = true
+steroids.config.tabBar.tabs = [
+  {
+    title: "Index"
+    icon: "vendor/iconbeast/home.png"
+    location: "http://localhost/views/example/index.html"
+  },
+  {
+    title: "Settings"
+    icon: "vendor/iconbeast/gear.png"
+    location: "http://localhost/views/settings/index.html"
+  }
+]
 
 # steroids.config.tabBar.tintColor = "#000000"
 # steroids.config.tabBar.tabTitleColor = "#00aeef"
