@@ -1,16 +1,26 @@
-sidemenuApp = angular.module 'sidemenuApp', ['ngTouch']
+sidemenuApp = angular.module 'sidemenuApp', ['SidemenuModel', 'ngTouch']
 
-sidemenuApp.controller 'IndexCtrl', ($scope)->
+sidemenuApp.controller 'IndexCtrl', ($scope, SidemenuRestangular)->
 
-  $scope.back = ()->
-    steroids.drawers.hide {}
+  SidemenuRestangular.all('sidemenu').getList().then (sidemenu)->
+    $scope.sidemenu = sidemenu;
 
-  $scope.open = (url)->
-    tictacView = new steroids.views.WebView {
-        id: 'tictacDrawer'
-        location: url
-    }
-    steroids.drawers.hide {
-        center: tictacView
-    }
-    steroids.logger.log(tictacView)
+  $scope.isActive = (item)->
+    if item.active
+        $scope.currentItem = item
+    return item.active
+
+  $scope.switchMenu = (item)->
+    if item.active
+      steroids.drawers.hide {}
+    else
+      webView = new steroids.views.WebView {
+        id: item.id,
+        location: item.url
+      }
+      steroids.drawers.hide {
+        center: webView
+      }
+      item.active = true
+      $scope.currentItem && $scope.currentItem.active = false
+      $scope.currentItem = item
