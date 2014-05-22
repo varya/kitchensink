@@ -42,7 +42,7 @@ steroids.config.tabBar.tabs = [
 
 steroids.config.preloads = [
   {
-    id: "tictacDrawer"
+    id: "settings"
     location: "http://localhost/views/settings/index.html"
   }
 ]
