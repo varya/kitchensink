@@ -49,8 +49,8 @@ steroids.config.preloads = [
 
 # -- Drawers
 steroids.config.drawers =
-  right:
-    id: "rightDrawer"
+  left:
+    id: "sidemenuDrawer"
     location: "http://localhost/views/sidemenu/index.html"
     showOnAppLoad: false
     widthOfDrawerInPixels: 60

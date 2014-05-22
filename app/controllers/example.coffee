@@ -18,7 +18,7 @@ exampleApp.controller 'IndexCtrl', ($scope, ExampleRestangular)->
   menuButton.imagePath = "/vendor/icons8/menu-32.png"
   menuButton.onTap = =>
       steroids.drawers.show({
-        edge: steroids.screen.edges.RIGHT
+        edge: steroids.screen.edges.LEFT
       }, {
         onSuccess: ()->
           steroids.logger.log('success')
