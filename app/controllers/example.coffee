@@ -17,14 +17,9 @@ exampleApp.controller 'IndexCtrl', ($scope, ExampleRestangular)->
   menuButton = new steroids.buttons.NavigationBarButton
   menuButton.imagePath = "/vendor/icons8/menu-32.png"
   menuButton.onTap = =>
-      steroids.drawers.show({
+      steroids.drawers.show {
         edge: steroids.screen.edges.LEFT
-      }, {
-        onSuccess: ()->
-          steroids.logger.log('success')
-        onFailure: ()->
-          steroids.logger.log('fail')
-      })
+      }
 
   steroids.navigationBar.update
     buttons:
