@@ -23,3 +23,9 @@ exampleApp.controller 'IndexCtrl', ($scope, ExampleRestangular)->
   #Native navigation
   steroids.view.navigationBar.show "Steroids Kitchensink"
   steroids.view.setBackgroundColor "#FFFFFF"
+
+  menuButton = new steroids.buttons.NavigationBarButton
+  menuButton.imagePath = "/vendor/icons8/menu-32.png"
+  steroids.navigationBar.update
+    buttons:
+        left: [menuButton]
