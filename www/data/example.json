@@ -13,10 +13,5 @@
     "id": 3,
     "name": "Barcode Scanner plugin",
     "url": "/views/barcode/index.html"
-  },
-  {
-    "id": 4,
-    "name": "Side Menu",
-    "url": "/views/sidemenu/index.html"
   }
 ]
