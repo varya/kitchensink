@@ -1,4 +1,10 @@
 <div class="sidemenu" ng-controller="IndexCtrl">
-    <div class="tic-tac" ng-click="open('views/tictac/index.html')"></div>
-    <div class="back" ng-click="back()"></div>
+    <ul class="list" ng-click="back()">
+        <li class="item">
+            Examples
+        </li>
+        <li class="item" ng-click="open('views/settings/index.html')">
+            Settings
+        </li>
+    </ul>
 </div>

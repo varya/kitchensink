@@ -43,7 +43,7 @@ steroids.config.tabBar.tabs = [
 steroids.config.preloads = [
   {
     id: "tictacDrawer"
-    location: "http://localhost/views/tictac/index.html"
+    location: "http://localhost/views/settings/index.html"
   }
 ]
 
@@ -53,7 +53,7 @@ steroids.config.drawers =
     id: "sidemenuDrawer"
     location: "http://localhost/views/sidemenu/index.html"
     showOnAppLoad: false
-    widthOfDrawerInPixels: 60
+    widthOfDrawerInPixels: 100
   options:
     centerViewInteractionMode: "Full"
     closeGestures: ["PanNavBar", "PanCenterView", "TapCenterView"]
