@@ -21,23 +21,3 @@ img#camera-photo {
   padding-top: 60px;
   display: block;
 }
-
-.tic-tac,
-.back
-{
-    width: 40px;
-    height: 40px;
-    border: #CCC 1px solid;
-    border-radius: 50%;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    margin: 10px;
-}
-.tic-tac
-{
-    background-image:url(/vendor/iconbeast/tic-tac-toe.png);
-}
-.back
-{
-    background-image:url(/vendor/iconbeast/arrow-big-01.png);
-}
