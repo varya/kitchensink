@@ -1,0 +1,13 @@
+[
+  {
+    "id": "example",
+    "active": true,
+    "name": "Index",
+    "url": "/views/example/index.html"
+  },
+  {
+    "id": "settings",
+    "name": "Settings",
+    "url": "/views/settings/index.html"
+  }
+]
