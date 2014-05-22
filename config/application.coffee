@@ -26,13 +26,17 @@ steroids.config.preloads = [
   {
     id: "settings"
     location: "http://localhost/views/settings/index.html"
+  },
+  {
+    id: "example"
+    location: "http://localhost/views/example/index.html"
   }
 ]
 
 # -- Drawers
 steroids.config.drawers =
   left:
-    id: "sidemenuDrawer"
+    id: "sidemenu"
     location: "http://localhost/views/sidemenu/index.html"
     showOnAppLoad: false
     widthOfDrawerInPixels: 100
