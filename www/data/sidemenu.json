@@ -1,6 +1,6 @@
 [
   {
-    "id": "example",
+    "id": "http://localhost/views/example/index.html",
     "active": true,
     "name": "Index",
     "url": "/views/example/index.html"

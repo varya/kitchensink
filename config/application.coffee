@@ -28,21 +28,10 @@ steroids.config.location = "http://localhost/views/example/index.html"
 # steroids.config.tabBar.backgroundImage = ""
 #
 
-#steroids.config.preloads = [
-#  {
-#    id: "rightDrawer"
-#    location: "http://localhost/views/settings/index.html"
-#  }
-#]
-
 steroids.config.preloads = [
   {
     id: "settings"
     location: "http://localhost/views/settings/index.html"
-  },
-  {
-    id: "example"
-    location: "http://localhost/views/example/index.html"
   }
 ]
 
