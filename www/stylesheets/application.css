@@ -1,3 +1,7 @@
+html, body {
+  height: 100%;
+}
+
 img#camera-photo {
   width:100%;
 }
@@ -9,4 +13,11 @@ img#camera-photo {
   -webkit-box-align: center;
   width:100%;
   font-size:50px;
+}
+
+
+.sidemenu {
+  height: 100%;
+  padding-top: 60px;
+  display: block;
 }
