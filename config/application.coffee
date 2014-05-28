@@ -41,7 +41,7 @@ steroids.config.drawers =
     id: "sidemenu"
     location: "http://localhost/views/sidemenu/index.html"
     showOnAppLoad: false
-    widthOfDrawerInPixels: 100
+    widthOfDrawerInPixels: 250
   options:
     centerViewInteractionMode: "Full"
     closeGestures: ["PanNavBar", "PanCenterView", "TapCenterView"]
