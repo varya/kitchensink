@@ -5,9 +5,12 @@ sidemenuApp.controller 'IndexCtrl', ($scope, SidemenuRestangular)->
   SidemenuRestangular.all('sidemenu').getList().then (sidemenu)->
     $scope.sidemenu = sidemenu;
 
+  checkDefault = (item) ->
+    if item.active and not $scope.currentItem
+      $scope.currentItem = item
+
   $scope.isActive = (item)->
-    if item.active
-        $scope.currentItem = item
+    checkDefault(item)
     return item.active
 
   $scope.switchMenu = (item)->
