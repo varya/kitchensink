@@ -5,15 +5,27 @@ sidemenuApp.controller 'IndexCtrl', ($scope, SidemenuRestangular)->
   SidemenuRestangular.all('sidemenu').getList().then (sidemenu)->
     $scope.sidemenu = sidemenu;
 
-  checkDefault = (item) ->
+  window.addEventListener "message", (e)->
+    if e.data.recepient == 'sidemenu' and e.data.message == 'switch-first'
+      _markActive($scope.sidemenu[0])
+
+  _checkDefault = (item) ->
     if item.active and not $scope.currentItem
       $scope.currentItem = item
 
+  _markActive = (item)->
+    if $scope.currentItem
+      $scope.currentItem.active = false
+    $scope.currentItem = item
+    item.active = true
+    $scope.$apply()
+
   $scope.isActive = (item)->
-    checkDefault(item)
+    _checkDefault(item)
     return item.active
 
   $scope.switchMenu = (item)->
+
     if item.active
       steroids.drawers.hide {}
     else
@@ -24,6 +36,4 @@ sidemenuApp.controller 'IndexCtrl', ($scope, SidemenuRestangular)->
       steroids.drawers.hide {
         center: webView
       }
-      item.active = true
-      $scope.currentItem && $scope.currentItem.active = false
-      $scope.currentItem = item
+    _markActive(item)
