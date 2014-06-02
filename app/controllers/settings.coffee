@@ -11,10 +11,6 @@ settingsApp.controller 'IndexCtrl', ($scope)->
     closeButton = new steroids.buttons.NavigationBarButton()
     closeButton.imagePath = "/vendor/icons8/delete_sign-32.png"
     closeButton.onTap = ->
-      # Here I need to provide changes
-      # into SidemenuModel so that
-      # first item would have active: true,
-      # and others have active: false
       window.postMessage { recepient: "sidemenu", message: "switch-first" }
 
       initial = "http://localhost/views/example/index.html"
