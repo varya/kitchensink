@@ -1,14 +1,11 @@
-settingsApp = angular.module 'settingsApp', ['SidemenuModel', 'navigationBar', 'ngTouch']
+settingsApp = angular.module 'settingsApp', ['navigationBar', 'ngTouch']
 
-settingsApp.controller 'IndexCtrl', ($scope, SidemenuRestangular)->
+settingsApp.controller 'IndexCtrl', ($scope)->
 
   $scope.showMenu = ()->
     steroids.drawers.show {
       edge: steroids.screen.edges.LEFT
     }
-
-  SidemenuRestangular.all('sidemenu').getList().then (sidemenu) ->
-    $scope.sidemenu = sidemenu;
 
   $scope.$watch "assignments", () ->
     closeButton = new steroids.buttons.NavigationBarButton()
@@ -18,6 +15,8 @@ settingsApp.controller 'IndexCtrl', ($scope, SidemenuRestangular)->
       # into SidemenuModel so that
       # first item would have active: true,
       # and others have active: false
+      window.postMessage { recepient: "sidemenu", message: "switch-first" }
+
       initial = "http://localhost/views/example/index.html"
       steroids.layers.replace {
         view: new steroids.views.WebView {
