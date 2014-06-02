@@ -9,7 +9,7 @@ sidemenuApp.controller 'IndexCtrl', ($scope, SidemenuRestangular)->
     if e.data.recepient == 'sidemenu' and e.data.message == 'switch-first'
       _markActive($scope.sidemenu[0])
 
-  checkDefault = (item) ->
+  _checkDefault = (item) ->
     if item.active and not $scope.currentItem
       $scope.currentItem = item
 
@@ -21,7 +21,7 @@ sidemenuApp.controller 'IndexCtrl', ($scope, SidemenuRestangular)->
     $scope.$apply()
 
   $scope.isActive = (item)->
-    checkDefault(item)
+    _checkDefault(item)
     return item.active
 
   $scope.switchMenu = (item)->
