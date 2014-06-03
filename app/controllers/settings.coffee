@@ -1,6 +1,15 @@
 settingsApp = angular.module 'settingsApp', ['navigationBar', 'ngTouch']
 
-settingsApp.controller 'IndexCtrl', ($scope)->
+settingsApp.controller 'IndexCtrl', ($scope, $q)->
+
+  deferred = $q.defer()
+  steroids.view.setAllowedRotations {
+    allowedRotations: [0,180,-90,90]
+  }, {
+    onSuccess: () ->
+      deferred.resolve ''
+  }
+  promise = deferred.promise
 
   $scope.showMenu = ()->
     steroids.drawers.show {
@@ -17,11 +26,12 @@ settingsApp.controller 'IndexCtrl', ($scope)->
     ['#5b8ecb', '#FFFFFF']
   ]
   $scope.changeOrientation = (orientation) ->
-    switch orientation
-      when 'landscapeLeft' then steroids.screen.rotate orientation
-      when 'landscapeRight' then steroids.screen.rotate orientation
-      when 'portraitUpsideDown' then steroids.screen.rotate orientation
-      when 'portrait' then steroids.screen.rotate orientation
+    promise.then ()->
+      switch orientation
+        when 'landscapeLeft' then steroids.screen.rotate orientation
+        when 'landscapeRight' then steroids.screen.rotate orientation
+        when 'portraitUpsideDown' then steroids.screen.rotate orientation
+        when 'portrait' then steroids.screen.rotate orientation
 
   $scope.$watch "assignments", () ->
     diceButton = new steroids.buttons.NavigationBarButton()
