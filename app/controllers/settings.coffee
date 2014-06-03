@@ -7,6 +7,13 @@ settingsApp.controller 'IndexCtrl', ($scope)->
       edge: steroids.screen.edges.LEFT
     }
 
+  $scope.changeOrientation = (orientation) ->
+    switch orientation
+      when 'landscapeLeft' then steroids.screen.rotate orientation
+      when 'landscapeRight' then steroids.screen.rotate orientation
+      when 'portraitUpsideDown' then steroids.screen.rotate orientation
+      when 'portrait' then steroids.screen.rotate orientation
+
   $scope.$watch "assignments", () ->
     closeButton = new steroids.buttons.NavigationBarButton()
     closeButton.imagePath = "/vendor/icons8/delete_sign-32.png"
