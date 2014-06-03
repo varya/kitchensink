@@ -1,6 +1,17 @@
 <div ng-controller="IndexCtrl">
-    <navigation-bar title="Settings">
-        <left-button icon="/vendor/icons8/menu-32" onTap="showMenu()"></left-button>
-    </navigation-bar>
-    Settings will be here
+  <navigation-bar title="Settings">
+    <left-button icon="/vendor/icons8/menu-32" onTap="showMenu()"></left-button>
+  </navigation-bar>
+  <button class="button button-block" ng-click="changeOrientation('landscapeLeft')">
+    landscapeLeft
+  </button>
+  <button class="button button-block" ng-click="changeOrientation('landscapeRight')">
+    landscapeRight
+  </button>
+  <button class="button button-block" ng-click="changeOrientation('portraitUpsideDown')">
+    portraitUpsideDown
+  </button>
+  <button class="button button-block" ng-click="changeOrientation('portrait')">
+    portrait
+  </button>
 </div>
