@@ -5,10 +5,6 @@ sidemenuApp.controller 'IndexCtrl', ($scope, SidemenuRestangular)->
   SidemenuRestangular.all('sidemenu').getList().then (sidemenu)->
     $scope.sidemenu = sidemenu;
 
-  window.addEventListener "message", (e)->
-    if e.data.recepient == 'sidemenu' and e.data.message == 'switch-first'
-      _markActive($scope.sidemenu[0])
-
   _checkDefault = (item) ->
     if item.active and not $scope.currentItem
       $scope.currentItem = item
