@@ -9,7 +9,7 @@ settingsApp.controller 'IndexCtrl', ($scope)->
 
   $scope.$watch "assignments", () ->
     closeButton = new steroids.buttons.NavigationBarButton()
-    closeButton.imagePath = "/vendor/icons8/delete_sign-32.png"
+    closeButton.imagePath = "/vendor/icons8/dice-32.png"
     closeButton.onTap = ->
       window.postMessage { recepient: "sidemenu", message: "switch-first" }
 
