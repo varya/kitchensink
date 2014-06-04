@@ -8,12 +8,12 @@ settingsApp.controller 'IndexCtrl', ($scope)->
     }
 
   $scope.$watch "assignments", () ->
-    closeButton = new steroids.buttons.NavigationBarButton()
-    closeButton.imagePath = "/vendor/icons8/dice-32.png"
-    closeButton.onTap = ->
+    diceButton = new steroids.buttons.NavigationBarButton()
+    diceButton.imagePath = "/vendor/icons8/dice-32.png"
+    diceButton.onTap = ->
 
     steroids.view.navigationBar.update {
       buttons:
-        right: [closeButton]
+        right: [diceButton]
     }
 
