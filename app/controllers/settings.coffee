@@ -7,22 +7,29 @@ settingsApp.controller 'IndexCtrl', ($scope)->
       edge: steroids.screen.edges.LEFT
     }
 
-  $scope.$watch "assignments", () ->
-    closeButton = new steroids.buttons.NavigationBarButton()
-    closeButton.imagePath = "/vendor/icons8/delete_sign-32.png"
-    closeButton.onTap = ->
-      window.postMessage { recepient: "sidemenu", message: "switch-first" }
+  _colorSchemes = [
+    ['#c94a4a', '#FFFFFF']
+    ['#75873e', '#FFFFFF']
+    ['#dd97c7', '#000000']
+    ['#74d0ad', '#000000']
+    ['#4c1a2c', '#FFFFFF']
+    ['#c98f57', '#000000']
+    ['#5b8ecb', '#FFFFFF']
+  ]
 
-      initial = "http://localhost/views/example/index.html"
-      steroids.layers.replace {
-        view: new steroids.views.WebView {
-          id: initial,
-          location: initial
-        }
+  $scope.$watch "assignments", () ->
+    diceButton = new steroids.buttons.NavigationBarButton()
+    diceButton.imagePath = "/vendor/icons8/dice-32.png"
+    diceButton.onTap = ->
+      clr = _colorSchemes[Math.floor(Math.random()*_colorSchemes.length)];
+      steroids.view.navigationBar.setAppearance {
+        titleTextColor: clr[1]
+        buttonTintColor: clr[1]
+        tintColor: clr[0]
       }
 
     steroids.view.navigationBar.update {
       buttons:
-        right: [closeButton]
+        right: [diceButton]
     }
 
