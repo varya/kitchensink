@@ -16,6 +16,14 @@ settingsApp.controller 'IndexCtrl', ($scope, $q)->
       edge: steroids.screen.edges.LEFT
     }
 
+  $scope.changeOrientation = (orientation) ->
+    promise.then ()->
+      switch orientation
+        when 'landscapeLeft' then steroids.screen.rotate orientation
+        when 'landscapeRight' then steroids.screen.rotate orientation
+        when 'portraitUpsideDown' then steroids.screen.rotate orientation
+        when 'portrait' then steroids.screen.rotate orientation
+
   _colorSchemes = [
     ['#c94a4a', '#FFFFFF']
     ['#75873e', '#FFFFFF']
@@ -25,13 +33,6 @@ settingsApp.controller 'IndexCtrl', ($scope, $q)->
     ['#c98f57', '#000000']
     ['#5b8ecb', '#FFFFFF']
   ]
-  $scope.changeOrientation = (orientation) ->
-    promise.then ()->
-      switch orientation
-        when 'landscapeLeft' then steroids.screen.rotate orientation
-        when 'landscapeRight' then steroids.screen.rotate orientation
-        when 'portraitUpsideDown' then steroids.screen.rotate orientation
-        when 'portrait' then steroids.screen.rotate orientation
 
   $scope.$watch "assignments", () ->
     diceButton = new steroids.buttons.NavigationBarButton()
